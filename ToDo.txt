@@ -1,0 +1,11 @@
+SSBB TO DO
+
+Better animations 4
+better circlying 3
+add enimes 4
+add background 4
+add enviorment 4
+test combat 1
+ball bounce 2
+//ball rotation 1
+ball rotation firing point 1 

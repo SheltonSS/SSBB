@@ -20,7 +20,7 @@ func _ready():
 	PlayerAnim = get_node("PlayerAnimation")
 	
 func _process(_delta):
-	$"TagSprite02-Sheet/Pivot".rotation += rotation_speed * _delta
+	$"TagSprite02-Sheet/Pivot".rotation += (rotation_speed*2) * _delta
 
 func _physics_process(_delta):
 	get_input()

@@ -2,6 +2,7 @@ extends KinematicBody2D
 
 const IdleSpeed = 10
 
+export var rotation_speed = PI
 export (int) var speed = 200
 var velocity = Vector2()
 var projspeed = 1000
@@ -17,6 +18,9 @@ var RotationAngle
 func _ready():
 	set_physics_process(true)
 	PlayerAnim = get_node("PlayerAnimation")
+	
+func _process(_delta):
+	$"TagSprite02-Sheet/Pivot".rotation += rotation_speed * _delta
 
 func _physics_process(_delta):
 	get_input()

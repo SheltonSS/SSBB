@@ -7,6 +7,9 @@ export (int) var speed = 200
 var velocity = Vector2()
 var projspeed = 1000
 var proj = preload("res://Projectile.tscn")
+#var projarray = []
+#var shoot = false
+var orbitcoord
 
 var PlayerAnim
 var anim = ""
@@ -21,7 +24,7 @@ func _ready():
 	
 func _process(_delta):
 	$"TagSprite02-Sheet/Pivot".rotation += (rotation_speed*2) * _delta
-
+	
 func _physics_process(_delta):
 	get_input()
 	velocity = move_and_slide(velocity)
@@ -65,7 +68,7 @@ func _physics_process(_delta):
 			anim = "I_Left"
 		if RotationAngle >= -2.9 and RotationAngle <= -2:
 			anim = "I_Left"
-
+			
 	if anim != animnew:
 		animnew = anim
 		PlayerAnim.play(anim)
@@ -85,8 +88,13 @@ func get_input():
 	velocity = velocity.normalized() * speed
 	
 func fire():
+	#shoot = true 
+	orbitcoord = get_node("TagSprite02-Sheet/Pivot/KinematicBody2D/PlayerProj").global_position 
+	orbitcoord.x = orbitcoord.x-40
+	
 	var proj_instance = proj.instance()
-	proj_instance.position = get_global_position()
+	proj_instance.position = orbitcoord
 	proj_instance.rotation_degrees = get_angle_to(MousePosition)
 	proj_instance.velocity = get_global_mouse_position() - proj_instance.position
 	get_tree().get_root().call_deferred("add_child", proj_instance)
+	#projarray.append(proj_instance)

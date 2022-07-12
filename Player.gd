@@ -5,7 +5,7 @@ const IdleSpeed = 10
 export var rotation_speed = PI
 export (int) var speed = 200
 var velocity = Vector2()
-var projspeed = 1000
+var projspeed = 500
 var proj = preload("res://Projectile.tscn")
 var projarray = []
 #var shoot = false
@@ -111,6 +111,7 @@ func fire():
 	get_node("TagSprite02-Sheet/Pivot/PivotBod/PlayerProj").hide() 
 	var proj_instance = proj.instance()
 	proj_instance.idle = false
+	proj_instance.speed = projspeed
 	proj_instance.position = orbitcoord
 	proj_instance.rotation_degrees = get_angle_to(MousePosition)
 	proj_instance.velocity = get_global_mouse_position() - proj_instance.position

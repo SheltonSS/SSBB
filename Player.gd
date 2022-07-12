@@ -7,10 +7,10 @@ export (int) var speed = 200
 var velocity = Vector2()
 var projspeed = 1000
 var proj = preload("res://Projectile.tscn")
-#var projarray = []
+var projarray = []
 #var shoot = false
 var orbitcoord
-
+var proj_instance
 var PlayerAnim
 var anim = ""
 var animnew = ""
@@ -83,18 +83,36 @@ func get_input():
 		velocity.y += 1
 	if Input.is_action_pressed("ui_up"):
 		velocity.y -= 1
+	#if Input.is_action_just_pressed("LMB") || Input.is_action_just_pressed("RMB"):
 	if Input.is_action_just_pressed("LMB"):
 		fire()
+	if Input.is_action_just_pressed("RMB"):
+		reversefire()
+	if Input.is_action_just_pressed("ui_select"):
+		print("select")
+		get_node("TagSprite02-Sheet/Pivot").spawnproj()
 	velocity = velocity.normalized() * speed
+
+func reversefire():
+	#the make the ball go back towards the player location and then show the rotating sprite
+	
+	if projarray.empty() == false:
+		projarray[-1].foward = false
+		projarray.remove(-1) 
+		
+	#projarray[-1].velocity = global_position  - projarray[-1].position
+	
 	
 func fire():
 	#shoot = true 
-	orbitcoord = get_node("TagSprite02-Sheet/Pivot/KinematicBody2D/PlayerProj").global_position 
-	orbitcoord.x = orbitcoord.x-40
+	orbitcoord = get_node("TagSprite02-Sheet/Pivot/PivotBod/PlayerProj").global_position 
+	orbitcoord.x = orbitcoord.x-0
 	
+	get_node("TagSprite02-Sheet/Pivot/PivotBod/PlayerProj").hide() 
 	var proj_instance = proj.instance()
+	proj_instance.idle = false
 	proj_instance.position = orbitcoord
 	proj_instance.rotation_degrees = get_angle_to(MousePosition)
 	proj_instance.velocity = get_global_mouse_position() - proj_instance.position
 	get_tree().get_root().call_deferred("add_child", proj_instance)
-	#projarray.append(proj_instance)
+	projarray.append(proj_instance)

@@ -14,9 +14,11 @@ func _physics_process(delta):
 	else:
 		if foward == true:
 			var collision_info = move_and_collide(velocity.normalized()*delta*speed)
-			
+			if collision_info:
+				if collision_info.get_collider() != pivotpoint:
+					foward = false
+
 		elif foward == false:
-			#print("false foward")
 			
 			velocity = pivotpoint.global_position  - position
 			var collision_info = move_and_collide(velocity.normalized()*delta*speed)
@@ -24,15 +26,3 @@ func _physics_process(delta):
 				if collision_info.get_collider() == pivotpoint:
 					pivotpoint.get_node("PlayerProj").show()
 					queue_free()
-					print(collision_info.get_collider())
-#func _process(delta):
-#	$Sprite/Pivot.rotation += rotation_speed * delta
-
-
-#func _on_Area2D_area_entered(area):
-#	get_node("TagSprite02-Sheet/Pivot/PivotBod/PlayerProj").show()
-#	print("free")
-#	foward = true 
-#	idle = true
-#	#self.hide()
-#	get_tree().queue_delete(self)

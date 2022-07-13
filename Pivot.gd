@@ -51,5 +51,5 @@ func _process(_delta):
 		self.rotation += (rotation_speed*2) * _delta
 	if (proj_instance != null):
 		if is_instance_valid( proj_instance) == true:
-			player.projarray.remove(-1)
+#			player.projarray.remove(-1)
 			queue_free()

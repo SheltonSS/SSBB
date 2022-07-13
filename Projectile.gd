@@ -9,7 +9,7 @@ var delete = false
 onready var slime := get_tree().get_root().get_node("Slime")#.get_node("Slime")
 onready var player := get_tree().get_root().get_node("MainScene").get_node("Player")
 onready var pivotbod := get_tree().get_root().get_node("PivotBod")
-onready var pivotpoint := get_tree().get_root().get_node("MainScene").get_node("Player").get_node("TagSprite02-Sheet").get_node("Pivot").get_node("PivotBod")#.get_node("PlayerProj")
+#onready var pivotpoint := get_tree().get_root().get_node("MainScene").get_node("Player").get_node("TagSprite02-Sheet").get_node("Pivot").get_node("PivotBod")#.get_node("PlayerProj")
 onready var pivotpointHB := get_tree().get_root().get_node("MainScene").get_node("Player").get_node("TagSprite02-Sheet").get_node("Pivot")#.get_node("PivotBod").get_node("PlayerProj")
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):

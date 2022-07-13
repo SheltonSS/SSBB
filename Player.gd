@@ -1,31 +1,34 @@
 extends KinematicBody2D
 
 const IdleSpeed = 10
+var index = 0
 var maxproj = 3
 var currentproj = 0
 export var rotation_speed = PI
 export (int) var speed = 200
 var velocity = Vector2()
 var projspeed = 500
-var proj = preload("res://Projectile.tscn")
+var proj = preload("res://Pivot.tscn")
 var slime = preload("res://Slime.tscn")
 var projarray = []
 
-var orbitcoord
-var proj_instance
 var PlayerAnim
 var anim = ""
 var animnew = ""
 
 var MousePosition
 var RotationAngle
+var orbitcoord
+var proj_instance
+
 
 func _ready():
 	set_physics_process(true)
 	PlayerAnim = get_node("PlayerAnimation")
 	
 func _process(_delta):
-	$"TagSprite02-Sheet/Pivot".rotation += (rotation_speed*2) * _delta
+	#"TagSprite02-Sheet/Pivot".rotation += (rotation_speed*2) * _delta
+	pass
 	
 func _physics_process(_delta):
 	get_input()
@@ -83,11 +86,12 @@ func get_input():
 		velocity.y += 1
 	if Input.is_action_pressed("ui_up"):
 		velocity.y -= 1
-	#if Input.is_action_just_pressed("LMB") || Input.is_action_just_pressed("RMB"):
+	if Input.is_action_just_pressed("ui_com"):
+		enableorbit()
 	if Input.is_action_just_pressed("LMB"):
 		fire()
 	if Input.is_action_just_pressed("RMB"):
-		reversefire()
+		enableorbit()
 	if Input.is_action_just_pressed("ui_select"):
 		print("select")
 		var slime_instance = slime.instance()
@@ -96,6 +100,26 @@ func get_input():
 
 	velocity = velocity.normalized() * speed
 
+func fire():
+	if currentproj>0:
+		for i in projarray:
+			if is_instance_valid(i) == false:
+				projarray.remove(projarray.find(i))
+			else:
+				if i.isvisable():
+					i.fire()
+					break
+#		projarray[index]
+
+func enableorbit():
+	if currentproj < 3:
+		#spawn pivotpoint
+		currentproj+=1
+		proj_instance = proj.instance()
+	#	proj_instance.position = position
+		projarray.append(proj_instance)
+		get_node("TagSprite02-Sheet").add_child(proj_instance)
+		
 func reversefire():
 	#the make the ball go back towards the player location and then show the rotating sprite
 #	print(projarray)
@@ -104,21 +128,3 @@ func reversefire():
 			projarray[-1].foward = false
 			projarray.remove(projarray.size()-1)
 			currentproj-=1
-	
-func fire():
-	#spawn the proj at the pivot sprites position and set it to shoot towards mouse position
-	if (currentproj+1) <= maxproj:
-		#shoot = true 
-		currentproj+=1
-		orbitcoord = get_node("TagSprite02-Sheet/Pivot/PivotBod/PlayerProj").global_position 
-		orbitcoord.x = orbitcoord.x-0
-		
-		get_node("TagSprite02-Sheet/Pivot/PivotBod/PlayerProj").hide() 
-		proj_instance = proj.instance()
-		proj_instance.idle = false
-		proj_instance.speed = projspeed
-		proj_instance.position = orbitcoord
-		proj_instance.rotation_degrees = get_angle_to(MousePosition)
-		proj_instance.velocity = get_global_mouse_position() - proj_instance.position
-		get_tree().get_root().call_deferred("add_child", proj_instance)
-		projarray.append(proj_instance)

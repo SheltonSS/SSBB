@@ -50,6 +50,6 @@ func _process(_delta):
 	if spin==true:
 		self.rotation += (rotation_speed*2) * _delta
 	if (proj_instance != null):
-		if is_instance_valid( proj_instance) == true:
-#			player.projarray.remove(-1)
+		if is_instance_valid( proj_instance) == false:
+			player.currentproj-=1
 			queue_free()

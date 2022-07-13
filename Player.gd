@@ -105,6 +105,8 @@ func fire():
 		for i in projarray:
 			if is_instance_valid(i) == false:
 				projarray.remove(projarray.find(i))
+#				currentproj -=1
+#				print(currentproj)
 			else:
 				if i.isvisable():
 					i.fire()
@@ -115,6 +117,7 @@ func enableorbit():
 	if currentproj < 3:
 		#spawn pivotpoint
 		currentproj+=1
+		print(currentproj)
 		proj_instance = proj.instance()
 	#	proj_instance.position = position
 		projarray.append(proj_instance)

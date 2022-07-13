@@ -9,7 +9,7 @@ func _ready():
 
 func spawnenemy():
 	if Input.is_action_just_pressed("ui_select"):
-		print("select")
+#		print("select")
 		var slime_instance = slime.instance()
 		slime_instance.position = $Player.global_position
 		add_child(slime_instance)

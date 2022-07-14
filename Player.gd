@@ -2,6 +2,7 @@ extends KinematicBody2D
 
 const IdleSpeed = 10
 var index = 0
+var perrfectparry = false
 var maxproj = 3
 var currentproj = 0
 export var rotation_speed = PI
@@ -11,6 +12,7 @@ var projspeed = 500
 var proj = preload("res://Pivot.tscn")
 var slime = preload("res://Slime.tscn")
 var projarray = []
+var ppzonearray = []
 
 var PlayerAnim
 var anim = ""
@@ -27,7 +29,6 @@ func _ready():
 	PlayerAnim = get_node("PlayerAnimation")
 	
 func _process(_delta):
-	#"TagSprite02-Sheet/Pivot".rotation += (rotation_speed*2) * _delta
 	pass
 	
 func _physics_process(_delta):
@@ -93,11 +94,7 @@ func get_input():
 	if Input.is_action_just_pressed("RMB"):
 		enableorbit()
 	if Input.is_action_just_pressed("ui_select"):
-		print("select")
-		var slime_instance = slime.instance()
-		slime_instance.position = global_position
-		get_tree().get_root().call_deferred("add_child", slime_instance)
-
+		pass
 	velocity = velocity.normalized() * speed
 
 func fire():
@@ -105,29 +102,58 @@ func fire():
 		for i in projarray:
 			if is_instance_valid(i) == false:
 				projarray.remove(projarray.find(i))
-#				currentproj -=1
-#				print(currentproj)
 			else:
 				if i.isvisable():
 					i.fire()
 					break
-#		projarray[index]
+					
+	for i in ppzonearray:
+		perfectparryup(i)
+		break
 
 func enableorbit():
 	if currentproj < 3:
 		#spawn pivotpoint
 		currentproj+=1
-		print(currentproj)
+#		print(currentproj)
 		proj_instance = proj.instance()
-	#	proj_instance.position = position
+#		proj_instance.position = position
 		projarray.append(proj_instance)
 		get_node("TagSprite02-Sheet").add_child(proj_instance)
 		
 func reversefire():
-	#the make the ball go back towards the player location and then show the rotating sprite
+#	make the ball go back towards the player location and then show the rotating sprite
+#	does not work anymore (probobly)
 #	print(projarray)
 	if projarray.empty() == false && currentproj > 0:
 		if is_instance_valid(projarray[-1]):
 			projarray[-1].foward = false
 			projarray.remove(projarray.size()-1)
 			currentproj-=1
+			
+func _on_PerfectParryArea_body_entered(body):
+		body.ppzone = true
+		ppzonearray.append(body)
+#	if body.perfectparry == true:
+		print("Perfect Parry zone entered")
+#		perrfectparry = true
+
+func perfectparryup(proj):
+	proj.foward = true
+	proj.scale = Vector2(1, 1)
+	proj.scale.x *= 1.3
+	proj.scale.y *= 1.3
+	proj.speed = proj.speed *1.3
+	proj.ppzone = false
+	proj.velocity = get_global_mouse_position() - proj.position
+
+	
+	
+	#increase dmg
+
+func _on_PerfectParryArea_body_exited(body):
+	print("No PP")
+	body.perfectparry =false
+	body.ppzone = false
+	ppzonearray.remove(ppzonearray.find(body))
+	pass # Replace with function body.

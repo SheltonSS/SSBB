@@ -9,6 +9,7 @@ var proj_instance = null
 var projspeed = 500
 var visablity =true
 var delete = false
+var perfectparry = false
 export var rotation_speed = PI
 var proj = preload("res://Projectile.tscn")
 onready var player := get_tree().get_root().get_node("MainScene").get_node("Player")

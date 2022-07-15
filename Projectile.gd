@@ -2,6 +2,7 @@ extends KinematicBody2D
 var velocity = Vector2(1,0)
 var speed = 500
 export var rotation_speed = PI
+
 var idle = true 
 var foward = true
 var delete = false

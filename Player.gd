@@ -29,7 +29,9 @@ func _ready():
 	PlayerAnim = get_node("PlayerAnimation")
 	
 func _process(_delta):
-	pass
+	for i in projarray:
+		if is_instance_valid(i) == false:
+			projarray.remove(projarray.find(i))
 	
 func _physics_process(_delta):
 	get_input()
@@ -90,6 +92,8 @@ func get_input():
 	if Input.is_action_just_pressed("ui_com"):
 		enableorbit()
 	if Input.is_action_just_pressed("LMB"):
+
+		print("click")
 		fire()
 	if Input.is_action_just_pressed("RMB"):
 		enableorbit()
@@ -99,17 +103,28 @@ func get_input():
 
 func fire():
 	if currentproj>0:
+		print(projarray)
 		for i in projarray:
+			print(i)
 			if is_instance_valid(i) == false:
+				print("renoved: ")
 				projarray.remove(projarray.find(i))
 			else:
 				if i.isvisable():
+					print("fire")
 					i.fire()
 					break
 					
 	for i in ppzonearray:
 		perfectparryup(i)
 		break
+
+func removedelobjects():
+	for i in projarray:
+			print(i)
+			if is_instance_valid(i) == false:
+				print("renoved: ")
+				projarray.remove(projarray.find(i))
 
 func enableorbit():
 	if currentproj < 3:
@@ -146,9 +161,6 @@ func perfectparryup(proj):
 	proj.speed = proj.speed *1.3
 	proj.ppzone = false
 	proj.velocity = get_global_mouse_position() - proj.position
-
-	
-	
 	#increase dmg
 
 func _on_PerfectParryArea_body_exited(body):

@@ -1,5 +1,6 @@
 extends Node2D
 var count = 0 
+var shots = 0
 var spin = true
 var velocity = Vector2()
 var MousePosition
@@ -40,7 +41,7 @@ func fire():
 		proj_instance.idle = false
 		proj_instance.speed = projspeed
 		proj_instance.position = orbitcoord
-#		proj_instance.rotation_degrees = Player.get_angle_to(MousePosition)
+		shots += 1
 		proj_instance.velocity = get_global_mouse_position() - proj_instance.position
 		get_tree().get_root().call_deferred("add_child", proj_instance)
 		

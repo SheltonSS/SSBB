@@ -5,7 +5,7 @@
 [ext_resource path="res://MainScene.gd" type="Script" id=5]
 
 [sub_resource type="RectangleShape2D" id=11]
-extents = Vector2( 75, 75 )
+extents = Vector2( 125, 125 )
 
 [sub_resource type="Animation" id=6]
 resource_name = "I_Down"
@@ -171,6 +171,7 @@ hframes = 24
 frame = 16
 
 [node name="PerfectParryArea" type="Area2D" parent="Player/TagSprite02-Sheet"]
+position = Vector2( 0, -1 )
 collision_layer = 32
 collision_mask = 0
 

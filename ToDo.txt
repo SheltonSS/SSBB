@@ -8,14 +8,14 @@ add background 4
 add enviorment 4
 EFX(general) 4
 test combat 1 ->
----multiple enimes 2
----ball bounce 2
 ---player HP 4
 ---EFX(Combat) 4
 ---camra booundry 3
+
 -------------
 /////////////
-
+Bugs
+does no phase through slimes on the rebound
 /////////////
 -------------
 Done
@@ -23,4 +23,6 @@ Done
 //ball rotation 1
 //ball rotation firing point 1 
 //better circlying 3
+//multiple enimes 2
+//ball bounce 2
 -------------------

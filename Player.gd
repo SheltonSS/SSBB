@@ -114,9 +114,12 @@ func fire():
 					print("fire")
 					i.fire()
 					break
-					
+
 	for i in ppzonearray:
 		perfectparryup(i)
+		
+#		if i.get_collision_exceptions().size() > 0:
+#			i.remove_collision_exception_with(i.get_collision_exceptions ( )[-1])
 		break
 
 func removedelobjects():
@@ -130,9 +133,7 @@ func enableorbit():
 	if currentproj < 3:
 		#spawn pivotpoint
 		currentproj+=1
-#		print(currentproj)
 		proj_instance = proj.instance()
-#		proj_instance.position = position
 		projarray.append(proj_instance)
 		get_node("TagSprite02-Sheet").add_child(proj_instance)
 		
@@ -155,12 +156,15 @@ func _on_PerfectParryArea_body_entered(body):
 
 func perfectparryup(proj):
 	proj.foward = true
-	proj.scale = Vector2(1, 1)
-	proj.scale.x *= 1.3
-	proj.scale.y *= 1.3
-	proj.speed = proj.speed *1.3
+	proj.scale.x *= 1.1
+	proj.scale.y *= 1.1
+	proj.speed = proj.speed *1.2
+	print(proj.scale)
 	proj.ppzone = false
 	proj.velocity = get_global_mouse_position() - proj.position
+	if (proj.get_collision_exceptions ( ).size() > 0):
+		for i in proj.get_collision_exceptions():
+			proj.remove_collision_exception_with(proj.get_collision_exceptions ( )[-1])
 	#increase dmg
 
 func _on_PerfectParryArea_body_exited(body):

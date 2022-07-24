@@ -36,7 +36,6 @@ func fire():
 		spin = false
 		hide()
 		visablity = false
-		#get_node("TagSprite02-Sheet/Pivot/PivotBod/PlayerProj").hide() 
 		proj_instance = proj.instance()
 		proj_instance.idle = false
 		proj_instance.speed = projspeed

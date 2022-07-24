@@ -20,7 +20,6 @@ func _physics_process(delta):
 		pass
 	else:
 		if foward == true:
-#			print("shoot")
 			player.get_node("CollisionShape2D").disabled = true    
 			var collision_info = move_and_collide(velocity.normalized()*delta*speed)
 			if collision_info:
@@ -33,23 +32,17 @@ func _physics_process(delta):
 			velocity = player.position  - position
 			var collision_info = move_and_collide(velocity.normalized()*delta*speed)
 			if collision_info:
-#				print(collision_info.get_collider())
 				if collision_info.get_collider() == player:
-#					print("pp")
-#					pivotpoint.get_node("PlayerProj").show()
-#					pivotpointHB.visablity = true
 					delete = true
 					queue_free()
-#					if is_instance_valid(pivotpoint):
-#						pivotpoint.queue_free()
 
 				elif collision_info.get_collider().is_in_group ( "Enemy" ):
-#					collision_info.get_collider().get_node("Collision").disabled = true
 					enemycol(collision_info)
 
 func enemycol(var collision_info):
+	print("collision")
 	perfectparry = true
+	add_collision_exception_with(collision_info.get_collider())
+	#disable hitbox/ collision
 	pass
 #	print("Enemy")
-#	collision_info.get_collider().queue_free()
-#	queue_free()

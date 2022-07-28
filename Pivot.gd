@@ -32,7 +32,7 @@ func fire():
 	#spawn the proj at the pivot sprites position and set it to shoot towards mouse position
 	if count<1: 
 		orbitcoord = $PivotBod/PlayerProj.get_global_position()
-		orbitcoord.x = orbitcoord.x-0
+#		orbitcoord.x = orbitcoord.x-0
 		spin = false
 		hide()
 		visablity = false

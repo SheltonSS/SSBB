@@ -169,7 +169,13 @@ func perfectparryup(proj):
 
 func _on_PerfectParryArea_body_exited(body):
 	print("No PP")
-	body.perfectparry =false
+	body.perfectparry = false
 	body.ppzone = false
 	ppzonearray.remove(ppzonearray.find(body))
+	pass # Replace with function body.
+
+func _on_Boundry_body_entered(body):
+	print("wall bounce")
+	if body.is_in_group ( "Enemy" ) == false:
+		body.foward=false
 	pass # Replace with function body.

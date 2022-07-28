@@ -8,14 +8,15 @@ add background 4
 add enviorment 4
 EFX(general) 4
 test combat 1 ->
+---improve test slimes 3
 ---player HP 4
 ---EFX(Combat) 4
----camra booundry 3
+---camra booundry 2
 
 -------------
 /////////////
 Bugs
-does no phase through slimes on the rebound
+
 /////////////
 -------------
 Done
@@ -25,4 +26,5 @@ Done
 //better circlying 3
 //multiple enimes 2
 //ball bounce 2
+//does not phase through slimes on the rebound
 -------------------

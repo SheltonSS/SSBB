@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://SSBB Sprites/TagSprite02-Sheet.png" type="Texture" id=1]
 [ext_resource path="res://Player.gd" type="Script" id=2]
@@ -156,6 +156,12 @@ tracks/0/keys = {
 
 [sub_resource type="CapsuleShape2D" id=10]
 
+[sub_resource type="RectangleShape2D" id=12]
+extents = Vector2( 525, 7.5 )
+
+[sub_resource type="RectangleShape2D" id=13]
+extents = Vector2( 15, 297.5 )
+
 [node name="MainScene" type="Node2D"]
 position = Vector2( 1, 0 )
 script = ExtResource( 5 )
@@ -195,5 +201,28 @@ anims/RESET = SubResource( 3 )
 position = Vector2( 1, 1 )
 shape = SubResource( 10 )
 
+[node name="Camera2D" type="Camera2D" parent="Player"]
+rotating = true
+current = true
+
+[node name="Boundry" type="Area2D" parent="Player/Camera2D"]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Player/Camera2D/Boundry"]
+position = Vector2( -3, 299 )
+shape = SubResource( 12 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Camera2D/Boundry"]
+position = Vector2( 3, -300 )
+shape = SubResource( 12 )
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Player/Camera2D/Boundry"]
+position = Vector2( 517, 3.5 )
+shape = SubResource( 13 )
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Player/Camera2D/Boundry"]
+position = Vector2( -518, 0 )
+shape = SubResource( 13 )
+
 [connection signal="body_entered" from="Player/TagSprite02-Sheet/PerfectParryArea" to="Player" method="_on_PerfectParryArea_body_entered"]
 [connection signal="body_exited" from="Player/TagSprite02-Sheet/PerfectParryArea" to="Player" method="_on_PerfectParryArea_body_exited"]
+[connection signal="body_entered" from="Player/Camera2D/Boundry" to="Player" method="_on_Boundry_body_entered"]

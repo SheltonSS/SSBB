@@ -46,3 +46,8 @@ func enemycol(var collision_info):
 	#disable hitbox/ collision
 	pass
 #	print("Enemy")
+
+func wallcol (var collision_info):
+	print("wall bounce")
+	perfectparry = true
+	

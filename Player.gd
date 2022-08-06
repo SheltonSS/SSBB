@@ -6,7 +6,7 @@ var perrfectparry = false
 var maxproj = 3
 var currentproj = 0
 export var rotation_speed = PI
-export (int) var speed = 200
+export (int) var speed = 275
 var velocity = Vector2()
 var projspeed = 500
 var proj = preload("res://Pivot.tscn")
@@ -175,7 +175,22 @@ func _on_PerfectParryArea_body_exited(body):
 	pass # Replace with function body.
 
 func _on_Boundry_body_entered(body):
-	print("wall bounce")
+#	print("wall bounce")
 	if body.is_in_group ( "Enemy" ) == false:
 		body.foward=false
-	pass # Replace with function body.
+		
+		
+	elif body.is_in_group ( "Enemy" ):
+#		body.state="bounce"
+#		var anglein = body.position.angle_to(self.position)
+#		var angleout =  anglein - PI
+#		var x1 = body.position.x
+#		var y1 = body.position.y
+#		print(anglein)
+#		print(angleout)
+#		var l = 50
+#		var ang  = angleout
+#		var endpoint = Vector2(x1 + l * cos(ang), y1 + l * sin(ang))
+#		body.target = endpoint
+#		body.velocity = body.target - position
+		pass # Replace with function body.

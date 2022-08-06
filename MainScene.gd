@@ -11,7 +11,8 @@ func spawnenemy():
 	print("select")
 	var slime_instance = slime.instance()
 	slime_instance.position = $Player.global_position
-	get_tree().get_root().call_deferred("add_child", slime_instance)
+	add_child(slime_instance)
+#	get_tree().get_root().call_deferred("add_child", slime_instance)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

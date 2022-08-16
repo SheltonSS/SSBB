@@ -2,6 +2,7 @@ extends Node2D
 
 # Declare member variables here. Examples:
 var slime = preload("res://Slime.tscn")
+var enemylist = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -12,6 +13,7 @@ func spawnenemy():
 	var slime_instance = slime.instance()
 	slime_instance.position = $Player.global_position
 	add_child(slime_instance)
+	enemylist.append(slime_instance)
 #	get_tree().get_root().call_deferred("add_child", slime_instance)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

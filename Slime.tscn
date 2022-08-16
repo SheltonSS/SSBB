@@ -84,7 +84,9 @@ scale = Vector2( 0.65, 0.5 )
 position = Vector2( 0, 4 )
 shape = SubResource( 5 )
 
-[connection signal="screen_entered" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]
-[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
-[connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.25
+autostart = true
+
 [connection signal="area_exited" from="Area2D" to="." method="_on_Area2D_area_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
